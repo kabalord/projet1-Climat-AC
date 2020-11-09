@@ -99,10 +99,10 @@ ticks
 30.0
 
 BUTTON
-126
-129
-192
-162
+287
+73
+353
+106
 NIL
 setup
 NIL
@@ -116,10 +116,10 @@ NIL
 1
 
 BUTTON
-284
-127
-347
-160
+395
+73
+458
+106
 NIL
 go
 T
@@ -131,6 +131,59 @@ NIL
 NIL
 NIL
 0
+
+MONITOR
+86
+171
+267
+216
+NIL
+quantité CO2 déposé cars
+17
+1
+11
+
+MONITOR
+492
+171
+676
+216
+NIL
+quantité CO2 absorbé trees
+17
+1
+11
+
+PLOT
+88
+286
+681
+491
+dynamique de l’atmosphère
+time
+pollutin
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"cars" 1.0 0 -10402772 true "" "plot count cars"
+"usines" 1.0 0 -5298144 true "" "plot count usines "
+"arbres" 1.0 0 -15040220 true "" "plot count arbres"
+
+MONITOR
+287
+171
+474
+216
+NIL
+quantité CO2 déposé usines
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
