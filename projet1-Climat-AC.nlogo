@@ -1,84 +1,105 @@
-globals [
-  sample-car
-  sample-tree
-  sample-usine
-]
+breed [cars car]
+breed [factories factory]
+breed [trees tree]
 
-turtles-own [ co2 ]
+cars-own[ CO2depose ]
+factories-own[ CO2depose ]
+trees-own [ CO2absorbe ]
+patches-own [ pollution ]
 
 to setup
  clear-all
- setup-patches
- setup-turtles
- setup-cars
- setup-trees
+  set-default-shape cars "car"
+  set-default-shape trees "tree"
+  set-default-shape factories "factory"
+  create-cars 10
+  [ set color blue
+    setxy random-xcor random-ycor
+    set size 1]
+  create-trees 10
+  [ set color green
+    setxy random-xcor random-ycor
+    set size 2]
+  create-factories 10
+  [ set color red
+    setxy random-xcor random-ycor
+    set size 4]
+    ask patches [ set pollution 0 ]
+    setup-patches
  reset-ticks
 end
+
+;to sprouted
+;  ask one-of-patches
+;  [
+;    sproud 5
+;    [
+;      set size 2
+;      set label  "sprouted"
+;    ]
+;  ]
+;end
 
 to go
  if ticks >= 500 [ stop ]
  move-cars
- produce-co2
+  ask cars [ produce-C02 ]
+  ask trees [ absorbe-CO2 ]
+  diffuse pollution 1
  tick
 end
 
 to setup-patches
- ask patches [ set pcolor green ]
-end
-
-to setup-turtles
- ask turtles [ setxy random-xcor random-ycor ]
-end
-
-to setup-trees
-  create-turtles 10
-  ask turtles [ setxy random-xcor random-ycor ]
-end
-
-to setup-cars
-  set-default-shape turtles "car"
-  set sample-car one-of turtles
-end
-
-; this procedure is needed so when we click "Setup" we
-; don't end up with any two cars on the same patch
-to separate-cars ;; turtle procedure
-  if any? other turtles-here [
-    fd 1
-    separate-cars
+  file-open "cellules-map.txt"
+  foreach sort patches [ p ->
+    ask p [
+      set pollution file-read
+      set pcolor 46
+    ]
   ]
-end
-
-to move-turtles
- ask turtles [
- right random 1
- forward 1
- ]
+  file-close
 end
 
 to move-cars
- ask turtles [
+ ask cars [
  right random 1
  forward 1
  ]
 end
 
-to produce-co2
- ask turtles [
- if pcolor = green [
- set pcolor gray
- ]
- ]
+to produce-C02
+   if pcolor = 46 [
+    set pcolor 25
+    set CO2depose CO2depose + 10
+  ]
+  ifelse show-CO2-cars
+  [ set label CO2depose ]
+  [ set label "" ]
+end
+
+
+to absorbe-CO2
+    if pcolor = 25 [
+    set pcolor 46
+    set CO2absorbe CO2absorbe + 500
+  ]
+  ifelse show-CO2-trees
+  [ set label CO2absorbe ]
+  [ set label "" ]
+end
+
+to patch-recolor
+  set pcolor (yellow + 4.9 - pollution)
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
-701
-50
-1138
-488
+615
+11
+1233
+498
 -1
 -1
-13.0
+16.5
 1
 10
 1
@@ -88,10 +109,10 @@ GRAPHICS-WINDOW
 1
 1
 1
--16
-16
--16
-16
+-18
+18
+-14
+14
 1
 1
 1
@@ -99,10 +120,10 @@ ticks
 30.0
 
 BUTTON
-287
-73
-353
-106
+214
+78
+280
+111
 NIL
 setup
 NIL
@@ -116,10 +137,10 @@ NIL
 1
 
 BUTTON
-395
-73
-458
-106
+322
+78
+385
+111
 NIL
 go
 T
@@ -133,10 +154,10 @@ NIL
 0
 
 MONITOR
-86
-171
-267
-216
+13
+176
+194
+221
 NIL
 quantité CO2 déposé cars
 17
@@ -144,10 +165,10 @@ quantité CO2 déposé cars
 11
 
 MONITOR
-492
-171
-676
-216
+419
+176
+603
+221
 NIL
 quantité CO2 absorbé trees
 17
@@ -155,10 +176,10 @@ quantité CO2 absorbé trees
 11
 
 PLOT
-88
-286
-681
-491
+15
+291
+608
+496
 dynamique de l’atmosphère
 time
 pollutin
@@ -175,15 +196,37 @@ PENS
 "arbres" 1.0 0 -15040220 true "" "plot count arbres"
 
 MONITOR
-287
-171
-474
-216
+214
+176
+401
+221
 NIL
 quantité CO2 déposé usines
 17
 1
 11
+
+SWITCH
+23
+133
+180
+166
+show-CO2-cars
+show-CO2-cars
+0
+1
+-1000
+
+SWITCH
+431
+134
+593
+167
+show-CO2-trees
+show-CO2-trees
+0
+1
+-1000
 
 @#$#@#$#@
 ## WHAT IS IT?
@@ -329,6 +372,26 @@ Circle -7500403 true true 8 8 285
 Circle -16777216 true false 60 75 60
 Circle -16777216 true false 180 75 60
 Polygon -16777216 true false 150 168 90 184 62 210 47 232 67 244 90 220 109 205 150 198 192 205 210 220 227 242 251 229 236 206 212 183
+
+factory
+false
+0
+Rectangle -7500403 true true 76 194 285 270
+Rectangle -7500403 true true 36 95 59 231
+Rectangle -16777216 true false 90 210 270 240
+Line -7500403 true 90 195 90 255
+Line -7500403 true 120 195 120 255
+Line -7500403 true 150 195 150 240
+Line -7500403 true 180 195 180 255
+Line -7500403 true 210 210 210 240
+Line -7500403 true 240 210 240 240
+Line -7500403 true 90 225 270 225
+Circle -1 true false 37 73 32
+Circle -1 true false 55 38 54
+Circle -1 true false 96 21 42
+Circle -1 true false 105 40 32
+Circle -1 true false 129 19 42
+Rectangle -7500403 true true 14 228 78 270
 
 fish
 false
