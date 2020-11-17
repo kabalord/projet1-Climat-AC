@@ -2,7 +2,7 @@ breed [cars car]
 breed [factories factory]
 breed [trees tree]
 
-cars-own[ CO2depose ]
+cars-own[ CO2depose deplacement]
 factories-own[ CO2depose ]
 trees-own [ CO2absorbe ]
 patches-own [ pollution ]
@@ -23,7 +23,7 @@ to setup
   create-factories 10
   [ set color red
     setxy random-xcor random-ycor
-    set size 4]
+    set size 3]
     ask patches [ set pollution 0 ]
     setup-patches
  reset-ticks
@@ -41,11 +41,15 @@ end
 ;end
 
 to go
- if ticks >= 500 [ stop ]
+ if ticks >= 2000 [ stop ]
  move-cars
-  ask cars [ produce-C02 ]
+  ask factories [ produce-C02-factories ]
+  ask cars [ produce-C02-cars ]
   ask trees [ absorbe-CO2 ]
   diffuse pollution 1
+  ask patches [
+    patch-recolor
+  ]
  tick
 end
 
@@ -53,8 +57,7 @@ to setup-patches
   file-open "cellules-map.txt"
   foreach sort patches [ p ->
     ask p [
-      set pollution file-read
-      set pcolor 46
+      set pcolor yellow
     ]
   ]
   file-close
@@ -62,26 +65,37 @@ end
 
 to move-cars
  ask cars [
- right random 1
+    right random 1
  forward 1
+    set deplacement deplacement + 1
  ]
 end
 
-to produce-C02
-   if pcolor = 46 [
-    set pcolor 25
-    set CO2depose CO2depose + 10
+to produce-C02-cars
+   if deplacement > 1 [
+    set CO2depose CO2depose + 0.5
+    set pollution pollution + 1
   ]
   ifelse show-CO2-cars
   [ set label CO2depose ]
   [ set label "" ]
 end
 
+to produce-C02-factories
+    set CO2depose CO2depose + 2
+    set pollution pollution + 1
+    set pcolor 3
+
+  ifelse show-CO2-factories
+  [ set label CO2depose ]
+  [ set label "" ]
+end
 
 to absorbe-CO2
-    if pcolor = 25 [
-    set pcolor 46
-    set CO2absorbe CO2absorbe + 500
+    if pollution > 0.1 [
+    set pollution pollution - 5
+    set CO2absorbe CO2absorbe + 300
+    set pcolor 89
   ]
   ifelse show-CO2-trees
   [ set label CO2absorbe ]
@@ -89,7 +103,7 @@ to absorbe-CO2
 end
 
 to patch-recolor
-  set pcolor (yellow + 4.9 - pollution)
+  set pcolor (46 - pollution)
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -224,6 +238,17 @@ SWITCH
 167
 show-CO2-trees
 show-CO2-trees
+0
+1
+-1000
+
+SWITCH
+215
+132
+400
+165
+show-CO2-factories
+show-CO2-factories
 0
 1
 -1000
