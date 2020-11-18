@@ -12,15 +12,15 @@ to setup
   set-default-shape cars "car"
   set-default-shape trees "tree"
   set-default-shape factories "factory"
-  create-cars 10
+  create-cars number-cars
   [ set color blue
     setxy random-xcor random-ycor
     set size 1]
-  create-trees 10
+  create-trees number-trees
   [ set color green
     setxy random-xcor random-ycor
     set size 2]
-  create-factories 10
+  create-factories number-factories
   [ set color red
     setxy random-xcor random-ycor
     set size 3]
@@ -173,7 +173,7 @@ MONITOR
 194
 221
 NIL
-quantité CO2 déposé cars
+CO2depose
 17
 1
 11
@@ -252,6 +252,51 @@ show-CO2-factories
 0
 1
 -1000
+
+SLIDER
+18
+240
+190
+273
+number-cars
+number-cars
+1
+100
+100.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+221
+238
+393
+271
+number-factories
+number-factories
+1
+100
+10.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+425
+237
+597
+270
+number-trees
+number-trees
+0
+100
+80.0
+1
+1
+NIL
+HORIZONTAL
 
 @#$#@#$#@
 ## WHAT IS IT?
