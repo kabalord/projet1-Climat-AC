@@ -57,7 +57,7 @@ to setup-patches
   file-open "cellules-map.txt"
   foreach sort patches [ p ->
     ask p [
-      set pcolor yellow
+      set pcolor 46
     ]
   ]
   file-close
@@ -75,6 +75,7 @@ to produce-C02-cars
    if deplacement > 1 [
     set CO2depose CO2depose + 0.5
     set pollution pollution + 1
+    set pcolor black
   ]
   ifelse show-CO2-cars
   [ set label CO2depose ]
@@ -84,7 +85,7 @@ end
 to produce-C02-factories
     set CO2depose CO2depose + 2
     set pollution pollution + 1
-    set pcolor 3
+    set pcolor black
 
   ifelse show-CO2-factories
   [ set label CO2depose ]
@@ -172,8 +173,8 @@ MONITOR
 234
 195
 279
-CO2cars
-count patches with [pcolor = 3]
+pas de CO2
+count patches with [pollution < 0]
 17
 1
 11
@@ -183,8 +184,8 @@ MONITOR
 234
 605
 279
-NIL
-quantité CO2 absorbé trees
+beaucoup de CO2 
+count patches with [pollution > 1 ]
 17
 1
 11
@@ -194,7 +195,7 @@ PLOT
 291
 608
 496
-dynamique de l’atmosphère
+pollution
 time
 pollution
 0.0
@@ -205,17 +206,15 @@ true
 true
 "" ""
 PENS
-"cars" 1.0 0 -10402772 true "" "plot count patches with [color = 46]"
-"usines" 1.0 0 -5298144 true "" "plot count usines "
-"arbres" 1.0 0 -15040220 true "" "plot count arbres"
+"pollution" 100.0 1 -5825686 true "" "plot count patches with [pollution > 0]"
 
 MONITOR
 216
 234
 403
 279
-NIL
-quantité CO2 déposé usines
+très peu de CO2
+count patches with [pollution > 0.2 and pollution < 1 ]
 17
 1
 11
@@ -262,7 +261,7 @@ number-cars
 number-cars
 1
 100
-100.0
+27.0
 1
 1
 NIL
@@ -277,7 +276,7 @@ number-factories
 number-factories
 1
 100
-10.0
+27.0
 1
 1
 NIL
@@ -292,7 +291,7 @@ number-trees
 number-trees
 0
 100
-80.0
+23.0
 1
 1
 NIL
