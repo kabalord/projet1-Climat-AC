@@ -168,21 +168,21 @@ NIL
 0
 
 MONITOR
-13
-176
-194
-221
-NIL
-CO2depose
+14
+234
+195
+279
+CO2cars
+count patches with [pcolor = 3]
 17
 1
 11
 
 MONITOR
-419
-176
-603
-221
+421
+234
+605
+279
 NIL
 quantité CO2 absorbé trees
 17
@@ -196,7 +196,7 @@ PLOT
 496
 dynamique de l’atmosphère
 time
-pollutin
+pollution
 0.0
 10.0
 0.0
@@ -205,15 +205,15 @@ true
 true
 "" ""
 PENS
-"cars" 1.0 0 -10402772 true "" "plot count cars"
+"cars" 1.0 0 -10402772 true "" "plot count patches with [color = 46]"
 "usines" 1.0 0 -5298144 true "" "plot count usines "
 "arbres" 1.0 0 -15040220 true "" "plot count arbres"
 
 MONITOR
-214
-176
-401
-221
+216
+234
+403
+279
 NIL
 quantité CO2 déposé usines
 17
@@ -221,9 +221,9 @@ quantité CO2 déposé usines
 11
 
 SWITCH
-23
+27
 133
-180
+184
 166
 show-CO2-cars
 show-CO2-cars
@@ -232,9 +232,9 @@ show-CO2-cars
 -1000
 
 SWITCH
-431
+434
 134
-593
+596
 167
 show-CO2-trees
 show-CO2-trees
@@ -243,9 +243,9 @@ show-CO2-trees
 -1000
 
 SWITCH
-215
+218
 132
-400
+403
 165
 show-CO2-factories
 show-CO2-factories
@@ -254,10 +254,10 @@ show-CO2-factories
 -1000
 
 SLIDER
-18
-240
-190
-273
+22
+180
+194
+213
 number-cars
 number-cars
 1
@@ -269,10 +269,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-221
-238
-393
-271
+225
+178
+397
+211
 number-factories
 number-factories
 1
@@ -284,10 +284,10 @@ NIL
 HORIZONTAL
 
 SLIDER
-425
-237
-597
-270
+429
+177
+601
+210
 number-trees
 number-trees
 0
