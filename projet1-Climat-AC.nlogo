@@ -63,6 +63,7 @@ to setup-patches
   file-close
 end
 
+
 to move-cars
  ask cars [
     right random 1
@@ -135,10 +136,10 @@ ticks
 30.0
 
 BUTTON
-214
-78
-280
-111
+210
+54
+276
+87
 NIL
 setup
 NIL
@@ -152,10 +153,10 @@ NIL
 1
 
 BUTTON
-322
-78
-385
-111
+318
+54
+381
+87
 NIL
 go
 T
@@ -169,32 +170,32 @@ NIL
 0
 
 MONITOR
-14
-234
-195
-279
-pas de CO2
+13
+134
+186
+179
+cellules avec pas de CO2
 count patches with [pollution < 0]
 17
 1
 11
 
 MONITOR
-421
-234
-605
-279
-beaucoup de CO2 
+418
+135
+592
+180
+cellules avec beaucoup de CO2 
 count patches with [pollution > 1 ]
 17
 1
 11
 
 PLOT
-15
-291
-608
-496
+10
+187
+599
+308
 pollution
 time
 pollution
@@ -206,24 +207,24 @@ true
 true
 "" ""
 PENS
-"pollution" 100.0 1 -5825686 true "" "plot count patches with [pollution > 0]"
+"pollution" 1.0 1 -5825686 true "" "plot count patches with [pollution > 0]"
 
 MONITOR
-216
-234
-403
-279
-très peu de CO2
+215
+134
+388
+179
+cellules avec très peu de CO2
 count patches with [pollution > 0.2 and pollution < 1 ]
 17
 1
 11
 
 SWITCH
-27
-133
-184
-166
+425
+86
+592
+119
 show-CO2-cars
 show-CO2-cars
 0
@@ -231,76 +232,96 @@ show-CO2-cars
 -1000
 
 SWITCH
-434
-134
+428
+10
+590
+43
+show-CO2-trees
+show-CO2-trees
+0
+1
+-1000
+
+SWITCH
+427
+47
+592
+80
+show-CO2-factories
+show-CO2-factories
+0
+1
+-1000
+
+SLIDER
+11
+10
+170
+43
+number-cars
+number-cars
+1
+100
+41.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+9
+49
+171
+82
+number-factories
+number-factories
+1
+100
+42.0
+1
+1
+NIL
+HORIZONTAL
+
+SLIDER
+9
+89
+172
+122
+number-trees
+number-trees
+0
+100
+100.0
+1
+1
+NIL
+HORIZONTAL
+
+PLOT
+10
+314
 596
-167
-show-CO2-trees
-show-CO2-trees
-0
-1
--1000
-
-SWITCH
-218
-132
-403
-165
-show-CO2-factories
-show-CO2-factories
-0
-1
--1000
-
-SLIDER
-22
-180
-194
-213
-number-cars
-number-cars
-1
-100
-27.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-225
-178
-397
-211
-number-factories
-number-factories
-1
-100
-27.0
-1
-1
-NIL
-HORIZONTAL
-
-SLIDER
-429
-177
-601
-210
-number-trees
-number-trees
-0
-100
-23.0
-1
-1
-NIL
-HORIZONTAL
+496
+dynamique de l’atmospère
+time
+labels
+0.0
+10.0
+0.0
+10.0
+true
+true
+"" ""
+PENS
+"pas de CO2" 1.0 0 -13840069 true "" "plot count patches with [pollution < 0]"
+"très peu de CO2" 1.0 0 -723837 true "" "plot count patches with [pollution > 0.2 and pollution < 1 ]"
+"beaucoup de CO2" 1.0 0 -2674135 true "" "plot count patches with [pollution > 1 ]"
 
 @#$#@#$#@
 ## WHAT IS IT?
 
-(a general understanding of what the model is trying to show or explain)
+L’idée est  représenter la dynamique de l’atmosphère pour comprendre les changements climatiques   
 
 ## HOW IT WORKS
 
@@ -332,7 +353,8 @@ HORIZONTAL
 
 ## CREDITS AND REFERENCES
 
-(a reference to the model's URL on the web if it has one, as well as any other necessary credits, citations, and links)
+Walter ROA étudiant Colombien d'intelligence artificielle Université de Reims - France
+Kevin LIEPO étudiant Ivoirien d'intelligence artificielle Université de Reims - France 
 @#$#@#$#@
 default
 true
